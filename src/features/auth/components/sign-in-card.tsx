@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
@@ -17,21 +18,22 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const formSchema = z.object({
-  email: z.email("Invalid email address"),
-  password: z.string().min(1, "Required"),
-});
+import { useLogin } from "../api/use-login";
+import { loginSchema } from "../schemas";
 
 const SignInCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useLogin();
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {};
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    mutate({ json: data });
+  };
 
   return (
     <div>
@@ -106,6 +108,17 @@ const SignInCard = () => {
             <FaGithub className="mr-2 size-5" />
             Login with GitHub
           </Button>
+        </CardContent>
+        <div className="px-7">
+          <DottedSeperator />
+        </div>
+        <CardContent className="p-7 flex items-center justify-center">
+          <p>
+            Don&apos;t have an account?
+            <Link href="/sign-up" className="text-blue-700">
+              &nbsp;Sign Up
+            </Link>
+          </p>
         </CardContent>
       </Card>
     </div>

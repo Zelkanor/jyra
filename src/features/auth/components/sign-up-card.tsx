@@ -24,25 +24,23 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const formSchema = z.object({
-  name: z.string().trim().min(1, "Required"),
-  email: z.email("Invalid email address"),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .max(64, "Password is too long"),
-});
+import { useRegister } from "../api/use-register";
+import { signUpSchema } from "../schemas";
 
 const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useRegister();
+
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {};
+  const onSubmit = (data: z.infer<typeof signUpSchema>) => {
+    mutate({ json: data });
+  };
   return (
     <div>
       <Card className="w-full h-full md:w-[487px] border-none shadow-none">
@@ -143,6 +141,14 @@ const SignUpCard = () => {
             <FaGithub className="mr-2 size-5" />
             Login with GitHub
           </Button>
+        </CardContent>
+        <CardContent className="p-7 flex items-center justify-center">
+          <p>
+            Already have an account?
+            <Link href="/sign-in" className="text-blue-700">
+              &nbsp;Sign In
+            </Link>
+          </p>
         </CardContent>
       </Card>
     </div>
