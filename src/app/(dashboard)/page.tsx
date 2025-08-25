@@ -2,16 +2,16 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 import { getCurrent } from "@/features/action";
-import SignInCard from "@/features/auth/components/sign-in-card";
+import { UserButton } from "@/features/auth/components/user-button";
 
-export default async function SignIn() {
+export default async function Home() {
   const user = await getCurrent();
-  if (user) {
-    redirect("/");
+  if (!user) {
+    redirect("/sign-in");
   }
   return (
     <div>
-      <SignInCard />
+      <UserButton />
     </div>
   );
 }
