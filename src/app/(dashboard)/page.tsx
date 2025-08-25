@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import React from "react";
 
-import { getCurrent } from "@/features/action";
+import { getCurrent } from "@/features/auth/action";
 
 export default async function Home() {
   const user = await getCurrent();
