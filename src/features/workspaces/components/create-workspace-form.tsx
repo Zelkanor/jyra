@@ -98,7 +98,8 @@ const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                       {field.value ? (
                         <div className="size-[72px] relative rounded-md overflow-hidden">
                           <Image
-                            className="object-cover "
+                            className="object-cover"
+                            fill
                             src={
                               field.value instanceof File
                                 ? URL.createObjectURL(field.value)
