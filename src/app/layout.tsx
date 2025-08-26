@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "sonner";
 
 import { QueryProvider } from "@/components/query.provider";
@@ -33,7 +34,7 @@ export default function RootLayout({
         >
           <QueryProvider>
             <Toaster />
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
           </QueryProvider>
         </ThemeProvider>
       </body>
