@@ -6,7 +6,7 @@ import React from "react";
 
 import Sidebar from "./sidebar";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 
 const MobileSidebar = () => {
   const [isOpen, setOpen] = React.useState(false);
@@ -24,6 +24,7 @@ const MobileSidebar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
+        <SheetTitle />
         <Sidebar />
       </SheetContent>
     </Sheet>
